@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PuckBase : ObjectBase
+public class Waypoint : MonoBehaviour
 {
-
+    public Vector3 upVector;
 }
