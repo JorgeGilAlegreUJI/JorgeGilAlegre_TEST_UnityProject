@@ -17,10 +17,30 @@ public class Car : ObjectBase
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        SetFirstIndex();
     }
     private void Update()
     {
         Movement();
+    }
+
+    void SetFirstIndex()
+    {
+        float minDis = float.MaxValue;
+        
+        for (int i = 0; i < route.transform.childCount; i++)
+        {
+            Transform child = route.transform.GetChild(i);
+            float dis = Vector2.Distance(transform.position, child.transform.position);
+            if (dis <= minDis)
+            {
+                minDis = dis;
+                currentIndex = i;
+            }
+            
+        }   
+        
+        transform.LookAt(route.transform.GetChild(currentIndex));
     }
 
     void Movement()
@@ -38,7 +58,7 @@ public class Car : ObjectBase
         Quaternion newRot = Quaternion.LookRotation(dir, nextPoint.upVector);
         transform.rotation = Quaternion.Lerp(transform.rotation, newRot, rotationSpeed * Time.deltaTime);
         float increment = (movementSpeed * Time.deltaTime);
-        transform.position += dir.normalized* increment;
+        transform.position += transform.forward* increment;
 
         //if(passedDistance)
     }

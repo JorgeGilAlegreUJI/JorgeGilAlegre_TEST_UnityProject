@@ -21,6 +21,7 @@ public class InputSystem : SystemsBase
             if (firstInput != Vector2.zero)
             {
                 InputAction();
+                SystemsHub.puckSpawner.ClearLine();
             }
             firstInput = Vector2.zero;
             return;
@@ -30,12 +31,13 @@ public class InputSystem : SystemsBase
         if (firstInput == Vector2.zero) firstInput = touchPos;
 
         inputDir = touchPos - firstInput;
+        SystemsHub.puckSpawner.visualizeDirection(inputDir/200f);
 
     }
 
     void InputAction()
     {
-        SystemsHub.puckSpawner.LaunchNewPuck(SystemsHub.puckSpawner.woodPuckPrefab,inputDir);
+        SystemsHub.puckSpawner.LaunchNewPuck(SystemsHub.puckSpawner.PuckPrefab,inputDir);
     }
 
     bool ActiveInput
