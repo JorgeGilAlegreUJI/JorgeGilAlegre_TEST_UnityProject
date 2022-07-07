@@ -5,4 +5,5 @@ using UnityEngine;
 public class SystemsHub : MonoBehaviour
 {
      public InputSystem inputSystem;
+     public PuckSpawner puckSpawner;
 }
