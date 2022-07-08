@@ -5,11 +5,16 @@ using UnityEngine;
 public class ObjectBase : MonoBehaviour
 {
     private bool isDying = false;
+    
+    public  virtual  float deathWaitTime
+    {
+        get { return 5f; }
+    }
 
     
     public IEnumerator StartDeath()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(deathWaitTime);
         isDying = true;
 
     }

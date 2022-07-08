@@ -46,17 +46,17 @@ public class Car : ObjectBase
 
     void Movement()
     {
-        Waypoint nextPoint = route.transform.GetChild(currentIndex).GetComponent<Waypoint>();
-        float dis = Vector3.Distance(transform.position, nextPoint.transform.position);
+        Vector3 nextPoint = route.transform.GetChild(currentIndex).transform.position;
+        float dis = Vector3.Distance(transform.position, nextPoint);
         if (dis <= distanceThreshold)
         {
             currentIndex++;
             if (currentIndex >= route.transform.childCount) currentIndex = 0;
-            nextPoint = route.transform.GetChild(currentIndex).GetComponent<Waypoint>();
+            nextPoint = route.transform.GetChild(currentIndex).transform.position;
         }
 
-        Vector3 dir = nextPoint.transform.position - transform.position;
-        Quaternion newRot = Quaternion.LookRotation(dir, nextPoint.upVector);
+        Vector3 dir = nextPoint - transform.position;
+        Quaternion newRot = Quaternion.LookRotation(dir, Vector3.up);
         transform.rotation = Quaternion.Lerp(transform.rotation, newRot, rotationSpeed * Time.deltaTime);
         float increment = (movementSpeed * Time.deltaTime);
         transform.position += transform.forward* increment;
@@ -71,7 +71,7 @@ public class Car : ObjectBase
         {
             GameObject Explosion = Instantiate(ExplosionPrefab, transform.position, Quaternion.identity);
             rb.velocity *= 1.2f;
-            //Coins.transform.SetParent(transform);
+            Explosion.transform.SetParent(transform);
         }
     }
 }

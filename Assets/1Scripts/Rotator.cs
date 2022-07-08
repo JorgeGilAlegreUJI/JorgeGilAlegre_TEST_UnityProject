@@ -9,6 +9,6 @@ public class Rotator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Rotate(rotationSpeed*rotationVector);
+        transform.Rotate(rotationVector * (rotationSpeed * Time.deltaTime));
     }
 }

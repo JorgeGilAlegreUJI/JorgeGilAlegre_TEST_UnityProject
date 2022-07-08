@@ -27,4 +27,9 @@ public class Coin : ObjectBase
         Vector3 torque = new Vector3(Random.Range(-1f,1f), Random.Range(-1f,1f), Random.Range(-1f,1f));
         rb.AddTorque(torque*Force);
     }
+
+    public override float deathWaitTime
+    {
+        get { return 3f; }
+    }
 }
