@@ -1,2 +1,1 @@
-# JorgeGilAlegre_TEST_UnityProject
- 
+Gameloft Game Developer Test, Jorge Gil Alegre.
