@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Car : ObjectBase
 {
+    public GameObject ExplosionPrefab;
     public Route route;
     public float distanceThreshold;
 
@@ -61,5 +62,16 @@ public class Car : ObjectBase
         transform.position += transform.forward* increment;
 
         //if(passedDistance)
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        ObjectBase ob = collision.transform.GetComponent<ObjectBase>();
+        if (ob is PuckBase)
+        {
+            GameObject Explosion = Instantiate(ExplosionPrefab, transform.position, Quaternion.identity);
+            rb.velocity *= 1.2f;
+            //Coins.transform.SetParent(transform);
+        }
     }
 }
